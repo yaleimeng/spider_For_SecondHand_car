@@ -23,7 +23,7 @@ def get_cars_in_Page(page):
     print('\n本页获取车辆数：', len(cars))
 
 #用单个页码进行测试
-pageList = ['https://www.renrenche.com/suz/ershouche/p{}//'.format(str(n))  for n in range(1, 26)]
+pageList = ['https://www.renrenche.com/suz/ershouche/p{}/'.format(str(n))  for n in range(1, 26)]
 get_cars_in_Page(pageList[9])
 
 # for page in pageList:           #如果想批量获取，用列表循环即可。
@@ -33,8 +33,8 @@ def  get_info_from(page):
     ua = 'Mozilla/5.0 (Windows NT 6.1;) AppleWebKit/532.5 (KHTML, like Gecko) Safari/532.5'
     head = {'User-Agent': ua}
     r = rq.get(page,headers = head, timeout=3)
-    #time.sleep(random.uniform(1.2,2.5))         #访问间隔时间。
-    soup = bs(r.text, 'lxml')                #因为文字编码问题，不能使用text，而必须是content
+    #time.sleep(random.uniform(1.2,2.5))         #访问间隔时间。可自行设置
+    soup = bs(r.text, 'lxml')               
     title = soup.find('h1',class_ ='title-name').text
     new_price = soup.find('div',class_='list').find_all('p')[1].text
     old_price =  soup.find('div',class_='list').find_all('span')[1].text
